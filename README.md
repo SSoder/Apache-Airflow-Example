@@ -15,12 +15,11 @@ This Apache Airflow pipeline performs the following steps:
 Presented below are the main sections of the dag definition file. The description of each file matches the commenting in the raw code. 
 
 ### Import Statements
-Dag definition file import statements. ETL functions being called by the Airflow Python Operators, as well as the primary Airflow libraries are imported.
+Dag definition file import statements. There are ETL functions imported that will be called by the Airflow PythonOperators. The primary Airflow libraries are also imported.
 
 ```
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.bash import BashOperator
 # import MongoExtract
 # import TweetTempLoad
 # import TweetCleanup
@@ -43,7 +42,7 @@ dag = DAG(
 
 
 ### Operator Definitions
-These operators are all Python Operators referencing the files imported above. Import statements commented out are currently WIP.
+These operators are all Python Operators referencing the files imported above. Import statements commented out functions that are currently WIP.
 
 ```
 mongoExtract_1 = PythonOperator(
