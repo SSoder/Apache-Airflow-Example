@@ -17,7 +17,7 @@ Presented below are the main sections of the dag definition file. The descriptio
 ### Import Statements
 Dag definition file import statements. ETL functions being called by the Airflow Python Operators, as well as the primary Airflow libraries are imported.
 
-`
+```
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
@@ -25,12 +25,13 @@ from airflow.operators.bash import BashOperator
 # import TweetTempLoad
 # import TweetCleanup
 # import TweetMainLoad
-`
+```
+
 
 ### DAG Definition
 Main DAG definition. I chose this method as opposed to the "with (DAG as dag)..." method simply by personal preference. (There is a section above this in the actual code that defines the default arguments. It is copied with minimal changes from the Apache Airflow Tutorial.)
 
-`
+```
 dag = DAG(
     'tweet_digest',
     default_args=default_args,
@@ -38,12 +39,13 @@ dag = DAG(
     schedule_interval=timedelta(hours=1),
     start_date=days_ago(2)
 )
-`
+```
+
 
 ### Operator Definitions
 These operators are all Python Operators referencing the files imported above. Import statements commented out are currently WIP.
 
-`
+```
 mongoExtract_1 = PythonOperator(
     task_id='MongoExtractor',
     python_callable=mongoExtract,
@@ -67,7 +69,7 @@ postgreTemptoMain_4 = pythonOperator(
     python_callable=tweetMainLoad,
     dag=dag
 )
-`
+```
 
 ### Task Dependency
 Here we establish task dependancy. In terms of graph structure, this is a very straightforward dag, moving in linear fashion from one task to the next. Due to the very simple ETL pipeline defined, there is no need for branching tasks or complex dependencies. To write in plain english, the dag is traversed as follows:
@@ -75,9 +77,8 @@ Here we establish task dependancy. In terms of graph structure, this is a very s
 2. LoadPostgre -    Reads the json file(s) created in step 1, and inserts into a PostgreSQL holding table.
 3. LocalCleanup -   This function reads the ID strings in the holding table, removes matching documents from MongoDB, and deletes the matching JSON files from local harddrive.
 4. PostgreTransfer- Once the MongoDB and JSON entries have been deleted, this function transfers the data from the holding table to the main postgresql data table. The reason for the holding table is to provide a convenient holding place for the SQL data while removing the associated MongoDB docs and JSON files to prevent unnecessary duplication/triplication of data.
-`
-mongoExtract_1 >> postgreLoad_2 >> localCleanup_3 >> postgreTemptoMain_4
-`
+
+`mongoExtract_1 >> postgreLoad_2 >> localCleanup_3 >> postgreTemptoMain_4`
 
 
 Author: Stefan Soder
