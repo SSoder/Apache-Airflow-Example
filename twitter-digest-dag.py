@@ -16,7 +16,6 @@ Last updated: 2021-2-22
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.bash import BashOperator
 # import MongoExtract
 # import TweetTempLoad
 # import TweetCleanup
@@ -66,9 +65,8 @@ dag = DAG(
 )
 
 #***************************************************************************************
-#   -> Operator definitions. At this point I am still working on finishing the operator 
-#   functions the dag calls, but those should be done by CoB today, no later than lunch
-#   tomorrow. I wanted to prioritize publishing the dag definition file.
+#   -> Operator definitions. These operators are all Python Operators referencing the
+#      files imported above. Import statements commented out are currently WIP. 
 #
 # **************************************************************************************
 
