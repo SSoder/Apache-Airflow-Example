@@ -79,6 +79,28 @@ Here we establish task dependancy. In terms of graph structure, this is a very s
 
 `mongoExtract_1 >> postgreLoad_2 >> localCleanup_3 >> postgreTemptoMain_4`
 
+#UPDATE: 2021-2-23
+
+##Data Handling Code
+The files MongoExtract.py and TweetTempLoad.py have been uploaded to the repository. Currently the perform as expected. They have not been connected approriately to the pipeline to be run independently by Airflow.
+
+*MongoExtract* performs the following actions:
+1. Parse configuration data for MongoDB login
+2. Connects to MongoDB
+3. Queries the MongoDB collection for the oldest 100 tweet documents
+4. Writes each tweet document to a local json file.
+
+*TweetTempLoad* performs the following actions:
+1. Read local JSON files containing tweet data into a list of dictionaries
+2. Parse list of dictionaries to extract the desired information to be inserted into PostgreSQL database
+3. Stores parsed information in a list of tuples to be passed to the SQL execution function
+4. Obtains database connection information for PostgreSQL
+5. Connects to PostgreSQL database
+6. Iterares through the list of tuples, performing the data insertion operation for each tuple of values
+
+*Next files to be uploaded: TweetCleanup.py, TweetMainLoad.py*
+
+
 
 Author: Stefan Soder
 Date: 2021-2-22
