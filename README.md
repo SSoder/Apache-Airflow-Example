@@ -79,9 +79,9 @@ Here we establish task dependancy. In terms of graph structure, this is a very s
 
 `mongoExtract_1 >> postgreLoad_2 >> localCleanup_3 >> postgreTemptoMain_4`
 
-#UPDATE: 2021-2-23
+# UPDATE: 2021-2-23
 
-##Data Handling Code
+## Data Handling Code
 The files MongoExtract.py and TweetTempLoad.py have been uploaded to the repository. Currently the perform as expected. They have not been connected approriately to the pipeline to be run independently by Airflow.
 
 *MongoExtract* performs the following actions:
