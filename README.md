@@ -82,7 +82,7 @@ Here we establish task dependancy. In terms of graph structure, this is a very s
 # UPDATE: 2021-2-23
 
 ## Data Handling Code
-The files MongoExtract.py and TweetTempLoad.py have been uploaded to the repository. Currently the perform as expected. They have not been connected approriately to the pipeline to be run independently by Airflow.
+The files MongoExtract.py and TweetTempLoad.py have been uploaded to the repository. Currently they perform as expected when run independently from the command line. They have not been connected to the pipeline to be run independently by Airflow.
 
 *MongoExtract* performs the following actions:
 1. Parse configuration data for MongoDB login
